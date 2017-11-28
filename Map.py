@@ -22,7 +22,6 @@ class Map:
         self.mapMaze = [[0 for x in range(m)] for y in range(n)]
         self.destinations = destinations
         self.obstaclesPosition = obstaclesPosition
-        # self.robotsPosition = robotsPosition
 
         for obstacle in obstaclesPosition:
             self.mapMaze[obstacle[0]][obstacle[1]] = self.OBSTACLE_ID
@@ -58,7 +57,7 @@ class Map:
 
         count = 0
         self.findPath(tempMap, destinationPoint, robotPosition)
-        self.printMap(tempMap, self.m, self.n)
+        #self.printMap(tempMap, self.m, self.n)
         self.movingThroughPath(tempMap, self.mapMaze, robotPosition, destinationPoint, robotId)
         print "new robot position", self.robotsPosition.get(robotId).currentPosition
 
@@ -114,7 +113,7 @@ class Map:
             print "move robot to position ", robotPosition
             map[robotPosition[0]][robotPosition[1]] = "   R"
             # print "====="
-            self.printMap(map, self.m, self.n)
+            #self.printMap(map, self.m, self.n)
 
         # self.printMap(map, self.m, self.n)
 
@@ -137,5 +136,5 @@ if __name__ == '__main__':
     map.start(m, n, robotsPosition, destinations, obstaclesPosition)
     map.moveRobot("C", "R1")
     map.moveRobot("B", "R1")
-    # map.moveRobot("D", "R1")
-    # map.moveRobot("A", "R1")
+    map.moveRobot("D", "R1")
+    map.moveRobot("A", "R1")
