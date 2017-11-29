@@ -109,6 +109,7 @@ class Map:
                         robotPosition = (newR, newC)
                         robotLevel = pathMap[newR][newC]
                         break
+            self.robotsPosition.get(robotId).moveToPosition(robotPosition)
             self.robotsPosition.get(robotId).currentPosition = robotPosition
             print "move robot to position ", robotPosition
             map[robotPosition[0]][robotPosition[1]] = "   R"
@@ -127,14 +128,16 @@ class Map:
             print
 
 if __name__ == '__main__':
-    m = 10
-    n = 10
-    robotsPosition = {"R1": (5, 5)}
-    obstaclesPosition = [(1,0), (1,1), (2,2), (3,2), (4,2), (5,2), (6,2), (7,2), (3,3)]
-    destinations = {"A": (0,0), "B": (0,9), "C": (9,0), "D": (9,9)}
+    m = 6
+    n = 6
+    robotsPosition = {"R1": (5, 0)}
+    obstaclesPosition = [(3,2), (2,3), (3,3)]
+    destinations = {"A": (5,0), "C": (0,0), "D": (0,5), "B": (5,5), "E": (2,2)}
     map = Map()
     map.start(m, n, robotsPosition, destinations, obstaclesPosition)
     map.moveRobot("C", "R1")
+    map.moveRobot("D", "R1")
+    map.moveRobot("E", "R1")
+    map.moveRobot("A", "R1")
     map.moveRobot("B", "R1")
     map.moveRobot("D", "R1")
-    map.moveRobot("A", "R1")
