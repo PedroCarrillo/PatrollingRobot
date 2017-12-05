@@ -22,7 +22,6 @@ class Map:
         self.mapMaze = [[0 for x in range(m)] for y in range(n)]
         self.destinations = destinations
         self.obstaclesPosition = obstaclesPosition
-        # self.robotsPosition = robotsPosition
 
         for obstacle in obstaclesPosition:
             self.mapMaze[obstacle[0]][obstacle[1]] = self.OBSTACLE_ID
@@ -58,7 +57,7 @@ class Map:
 
         count = 0
         self.findPath(tempMap, destinationPoint, robotPosition)
-        self.printMap(tempMap, self.m, self.n)
+        #self.printMap(tempMap, self.m, self.n)
         self.movingThroughPath(tempMap, self.mapMaze, robotPosition, destinationPoint, robotId)
         print "new robot position", self.robotsPosition.get(robotId).currentPosition
 
@@ -110,11 +109,12 @@ class Map:
                         robotPosition = (newR, newC)
                         robotLevel = pathMap[newR][newC]
                         break
+            self.robotsPosition.get(robotId).moveToPosition(robotPosition)
             self.robotsPosition.get(robotId).currentPosition = robotPosition
             print "move robot to position ", robotPosition
             map[robotPosition[0]][robotPosition[1]] = "   R"
             # print "====="
-            self.printMap(map, self.m, self.n)
+            #self.printMap(map, self.m, self.n)
 
         # self.printMap(map, self.m, self.n)
 
@@ -128,14 +128,16 @@ class Map:
             print
 
 if __name__ == '__main__':
-    m = 10
-    n = 10
-    robotsPosition = {"R1": (5, 5)}
-    obstaclesPosition = [(1,0), (1,1), (2,2), (3,2), (4,2), (5,2), (6,2), (7,2), (3,3)]
-    destinations = {"A": (0,0), "B": (0,9), "C": (9,0), "D": (9,9)}
+    m = 6
+    n = 6
+    robotsPosition = {"R1": (5, 0)}
+    obstaclesPosition = [(3,2), (2,3), (3,3)]
+    destinations = {"A": (5,0), "C": (0,0), "D": (0,5), "B": (5,5), "E": (2,2)}
     map = Map()
     map.start(m, n, robotsPosition, destinations, obstaclesPosition)
     map.moveRobot("C", "R1")
+    map.moveRobot("D", "R1")
+    map.moveRobot("E", "R1")
+    map.moveRobot("A", "R1")
     map.moveRobot("B", "R1")
-    # map.moveRobot("D", "R1")
-    # map.moveRobot("A", "R1")
+    map.moveRobot("D", "R1")
